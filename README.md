@@ -16,7 +16,9 @@ I have a passion for psychology and sports--I would love to work on a project wi
 ### R
 
 [Case Study Bellabeat](https://www.kaggle.com/code/jessehilario/case-study-bellabeat)
+
 My first project was the capstone for the Google Data Analytics Certification. Using R, I processed and cleaned data to analyze and visualize trends in smart device usage in order to make high-level recommendations for Bellabeat marketing strategy.
+
 ![Rplot](https://user-images.githubusercontent.com/106210905/183266060-57f26e86-af88-4dc8-93b5-e9a9e3a3c4d1.png)
 
 
