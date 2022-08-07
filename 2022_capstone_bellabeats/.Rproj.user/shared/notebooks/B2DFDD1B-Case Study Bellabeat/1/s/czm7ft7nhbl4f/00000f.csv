@@ -1,0 +1,4 @@
+"0","hours <- hourly_activity %>%"
+"0","  mutate(time = hour(activity_hour)) %>%"
+"0","  group_by(time) %>%"
+"0","  arrange(time)"

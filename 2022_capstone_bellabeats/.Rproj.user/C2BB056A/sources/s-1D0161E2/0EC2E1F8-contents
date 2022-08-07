@@ -1,0 +1,309 @@
+install.packages("tidyverse")
+install.packages("skimr")
+install.packages("janitor")
+library(tidyverse)
+library(lubridate)
+library(skimr)
+library(janitor)
+
+# Looking at the data
+
+## importing datasets and counting number of participants
+daily_activity <- read_csv("Fitabase Data 4.12.16-5.12.16/dailyActivity_merged.csv")
+n_distinct(daily_activity$Id)
+
+hour_calories <- read_csv("Fitabase Data 4.12.16-5.12.16/hourlyCalories_merged.csv")
+n_distinct(hour_calories$Id)
+
+hour_intensities <- read_csv("Fitabase Data 4.12.16-5.12.16/hourlyIntensities_merged.csv")
+n_distinct(hour_intensities$Id)
+
+seconds_heartrate <- read_csv("Fitabase Data 4.12.16-5.12.16/heartrate_seconds_merged.csv")
+n_distinct(seconds_heartrate$Id)
+
+minute_sleep <- read_csv("Fitabase Data 4.12.16-5.12.16/minuteSleep_merged.csv")
+n_distinct(minute_sleep$Id)
+
+day_sleep <- read_csv("sleepDay_merged.csv")
+n_distinct(day_sleep$Id)
+
+weight_loginfo <- read_csv("weightLogInfo_merged.csv")
+n_distinct(weight_loginfo$Id)
+
+hour_steps <- read_csv("Fitabase Data 4.12.16-5.12.16/hourlySteps_merged.csv")
+n_distinct(hour_steps$Id)
+
+### based on this, all data frames have satisfactory #participants except seconds_heartrate;
+### both sleeps have acceptable but let's keep day_sleep for the sake of simplicity?
+### weight also only has 8 participants... maybe we shouldn't keep either?
+### Dataset is very good in terms of measuring very specific times, but might not be super
+### applicable to the population because it's only 33 women at most per table
+
+
+
+View(daily_activity)    # yes
+View(hour_calories)     # yes
+View(hour_intensities)  # yes
+View(seconds_heartrate) # yes
+
+View(minute_sleep)      # no
+View(day_sleep)         # maybe
+
+View(weight_loginfo)    # no
+View(hour_steps)        # yes
+
+
+#maybe one of the advantages of SQL is the inner join which can help find easier the common
+#keys between tables
+
+
+
+# daily activity
+head(daily_activity)
+glimpse(daily_activity)
+str(daily_activity)
+skim_without_charts(daily_activity)
+daily_activity2 <- daily_activity %>% 
+  mutate(ActivityDate = mdy(daily_activity$ActivityDate),
+         Id = as.character(Id))
+daily_activity2
+### fixing the format of the date and Id
+
+colnames(daily_activity)
+
+daily_activity2 %>%
+  distinct(Id)                      # OR use unique() from base; distinct() is from dyplr
+sum(duplicated(daily_activity2))
+clean_names(daily_activity2)
+### more stuff to input in my data cleaning
+
+## avg daily calories
+avg_calories <- daily_activity2 %>%
+  group_by(Id) %>%
+  summarize(avg = mean(Calories)) %>%
+  arrange(avg)
+avg_calories
+typeof(avg_calories$Id)
+
+ggplot(daily_activity2, aes(x = ActivityDate, y = Calories, color = Id)) + 
+  geom_point() + 
+  facet_wrap(~Id)
+### each individual's graph... kinda ugly thought tbh
+
+ggplot(avg_calories, aes(x = Id, y = avg)) + geom_col()
+
+ggplot(avg_calories, aes(x = Id, y = avg, color = Id)) + geom_point()
+
+##can this account for number of responses?
+ggplot(daily_activity2, aes(x=ActivityDate)) + geom_bar()
+ggplot(daily_activity2, aes(x=Ac)) + geom_bar()
+
+
+## caloric progress as a group?
+daily_activity2 %>%
+  group_by(ActivityDate) %>%
+  summarize(avg = mean(Calories)) %>%
+  ggplot(aes(x = ActivityDate, y = avg)) + geom_point() + geom_smooth()
+
+### time is also an issue as data was only collected for about a month;
+### year round data is unavailable in this dataset
+
+
+
+
+
+# HOUR CALORIES
+glimpse(hour_calories)
+skim_without_charts(hour_calories)
+hour_calories <- clean_names(hour_calories)
+hour_calories <- hour_calories %>%
+  mutate(activity_hour = mdy_hms(activity_hour),
+        id = as.character(id))
+hour_calories
+View(hour_calories)
+
+hour_calories %>%
+  distinct(id)
+unique(hour_calories$id)
+sum(duplicated(hour_calories))
+### more stuff to input in my data cleaning
+
+##individual people
+ggplot(hour_calories, aes(x = activity_hour, y = calories, color = id)) + 
+  geom_point() +
+  facet_wrap(~id)
+
+## responses accounted for?
+ggplot(hour_calories, aes(x=activity_hour)) + geom_bar()
+
+## caloric progress as a group?
+hour_calories %>%
+  group_by(activity_hour) %>%
+  summarize(avg = mean(calories)) %>%
+  ggplot(aes(x = activity_hour, y = avg)) + geom_point() + geom_smooth()
+
+
+
+
+
+
+
+
+
+# HOUR INTENSITIES
+glimpse(hour_intensities)
+skim_without_charts(hour_intensities)
+hour_intensities <- clean_names(hour_intensities)
+hour_intensities <- hour_intensities %>%
+  mutate(activity_hour = mdy_hms(activity_hour),
+         id = as.character(id))
+hour_intensities
+View(hour_intensities)
+
+hour_intensities %>%
+  distinct(id)
+unique(hour_intensities$id)
+sum(duplicated(hour_intensities))
+### more stuff to input in my data cleaning
+
+
+
+
+
+
+
+
+
+# seconds_heartrate with time fixed
+head(seconds_heartrate)
+heartrate <- seconds_heartrate %>% mutate(Time = mdy_hms(Time))
+
+## Counting the number of observations in each participant
+### distinct participants
+n_distinct(seconds_heartrate$Id)
+
+#### will not include this table as there are only 14 participants; unreliable
+
+###distinct times per participant
+seconds_heartrate %>%
+  filter(Id == 2022484408) %>%
+  count(Time) %>%
+  summarise(sum = sum(n))
+
+seconds_heartrate %>%
+  filter(Id == 8877689391) %>%
+  count(Time) %>%
+  summarise(sum = sum(n))
+
+### seems like there's some participants who did the heartrate seconds and some who did not...
+
+### check if each table has the same participants and the number of participants
+
+heart_tibble <- as_tibble(seconds_heartrate %>% filter(Id == 1503960366))
+(separate(heart_tibble, Time, into=c("Date", "Time"), sep = ' ', extra = "merge"))
+
+ggplot(heartrate %>%
+         filter(Id == 2022484408),
+       aes(x = Time, y = Value)) + geom_point()
+
+
+
+
+
+
+
+# MINUTE SLEEP
+glimpse(minute_sleep)
+skim_without_charts(minute_sleep)
+
+n_distinct(minute_sleep)
+sum(duplicated(minute_sleep))
+###no idea what "values" variable means; let's omit this table
+### (could mean quality of sleep but idk which way valenced (is higher better or worse sleep?))
+
+ggplot(minute_sleep, aes(x = date, y = value)) + geom_col()       #don't run this
+
+
+
+
+
+
+# day sleep
+glimpse(day_sleep)
+skim_without_charts(day_sleep)
+day_sleep <- clean_names(day_sleep)
+day_sleep <- day_sleep %>%
+  mutate(activity_hour = mdy_hms(activity_hour),
+         id = as.character(id))
+day_sleep
+View(day_sleep)
+
+day_sleep %>%
+  distinct(id)
+unique(day_sleep$id)
+sum(duplicated(day_sleep))
+### more stuff to input in my data cleaning
+
+
+
+
+
+
+
+
+# weight loginfo
+str(weight_loginfo)
+glimpse(weight_loginfo)
+weight <- weight_loginfo %>%
+  mutate(Date = mdy_hms(Date), Id = as.character(Id))
+weight
+
+
+
+weight %>%
+  group_by(Date) %>%
+  summarize(avg = mean(WeightPounds)) %>%
+  ggplot(aes(x = Date, y = avg)) + geom_point()
+
+## tougher to get account of responses? Bc entries not in days but whenever the second is
+ggplot(weight, aes(x=Date)) + geom_bar()
+weight %>%
+  group_by(Id) %>%
+  summarise(total_response = n_distinct(Date))
+
+##tracking just one participant
+weight %>%
+  filter(Id == "6962181067") %>%
+  ggplot(aes(x = Date, y = WeightPounds)) + geom_point() + geom_smooth()
+
+weight %>%
+  filter(Id == "6962181067") %>%
+  ggplot(aes(x = Date, y = BMI)) + geom_point() + geom_smooth()        # also with BMI
+
+weight %>%
+  filter(Id == "8877689391") %>%
+  ggplot(aes(x = Date, y = WeightPounds)) + geom_point() + geom_smooth()
+
+weight %>%
+  filter(Id == "8877689391") %>%
+  ggplot(aes(x = Date, y = BMI)) + geom_point() + geom_smooth()
+### it's still hard to draw conclusions; seems like weight gains again toward end of month
+
+ggplot(weight, aes(x = IsManualReport)) + geom_bar()
+
+
+# hour steps
+glimpse(hour_steps)
+skim_without_charts(hour_steps)
+hour_steps <- clean_names(hour_steps)
+hour_steps <- hour_steps %>%
+  mutate(activity_hour = mdy_hms(activity_hour),
+         id = as.character(id))
+hour_steps
+View(hour_steps)
+
+hour_steps %>%
+  distinct(id)
+unique(hour_steps$id)
+sum(duplicated(hour_steps))
+### more stuff to input in my data cleaning

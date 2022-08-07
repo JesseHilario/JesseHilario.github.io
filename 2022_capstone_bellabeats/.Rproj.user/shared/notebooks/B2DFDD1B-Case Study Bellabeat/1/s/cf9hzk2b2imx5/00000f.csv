@@ -1,0 +1,5 @@
+"0","daily_activity <- daily_activity %>%"
+"0","  mutate(day = day(activity_date))"
+"0",""
+"0","daily_activity_sleep <- daily_activity_sleep %>%"
+"0","  mutate(day = day(activity_date))"
