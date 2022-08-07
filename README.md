@@ -21,8 +21,11 @@ My first project was the capstone for the Google Data Analytics Certification. U
 
 ![Rplot](https://user-images.githubusercontent.com/106210905/183309227-7cf874ba-cc6e-4dff-ad67-5d9fd34b8dd2.png)
 
+![Rplot 5](https://user-images.githubusercontent.com/106210905/183310479-9bb9a078-9abe-49b6-b475-ffdc73675492.png)
+
 ![Rplot2](https://user-images.githubusercontent.com/106210905/183308163-178b6093-79ed-47fd-b94e-88ae2cc73851.png)
 
+![Rplot2 5](https://user-images.githubusercontent.com/106210905/183310491-df9f7289-b0a2-40a7-89ea-f434e0f8862f.png)
 
 
 ***
