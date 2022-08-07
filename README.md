@@ -19,13 +19,9 @@ I have a passion for psychology and sports--I would love to work on a project wi
 
 My first project was the capstone for the Google Data Analytics Certification. Using R, I processed and cleaned data to analyze and visualize trends in smart device usage in order to make high-level recommendations for Bellabeat marketing strategy.
 
-![Rplot](https://user-images.githubusercontent.com/106210905/183309227-7cf874ba-cc6e-4dff-ad67-5d9fd34b8dd2.png)
+![Rplot 5](https://user-images.githubusercontent.com/106210905/183310908-0fee648f-4053-4a23-832d-845b4003d6c2.png)
 
-![Rplot 5](https://user-images.githubusercontent.com/106210905/183310479-9bb9a078-9abe-49b6-b475-ffdc73675492.png)
-
-![Rplot2](https://user-images.githubusercontent.com/106210905/183308163-178b6093-79ed-47fd-b94e-88ae2cc73851.png)
-
-![Rplot2 5](https://user-images.githubusercontent.com/106210905/183310534-f0ef176d-af0d-40c6-b8a2-80d8536e9718.png)
+![Rplot2 5](https://user-images.githubusercontent.com/106210905/183310910-adc5ecab-b76a-4968-8e51-f916824335be.png)
 
 
 
