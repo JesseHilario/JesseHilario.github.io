@@ -19,9 +19,9 @@ I have a passion for psychology and sports--I would love to work on a project wi
 
 My first project was the capstone for the Google Data Analytics Certification. Using R, I processed and cleaned data to analyze and visualize trends in smart device usage in order to make high-level recommendations for Bellabeat marketing strategy.
 
-![Rplot](https://user-images.githubusercontent.com/106210905/183266060-57f26e86-af88-4dc8-93b5-e9a9e3a3c4d1.png)
+![Rplot 5](https://user-images.githubusercontent.com/106210905/183310908-0fee648f-4053-4a23-832d-845b4003d6c2.png)
 
-![Rplot2](https://user-images.githubusercontent.com/106210905/183308163-178b6093-79ed-47fd-b94e-88ae2cc73851.png)
+![Rplot2 5](https://user-images.githubusercontent.com/106210905/183310910-adc5ecab-b76a-4968-8e51-f916824335be.png)
 
 
 
@@ -31,8 +31,6 @@ My first project was the capstone for the Google Data Analytics Certification. U
 [My Kaggle](https://www.kaggle.com/jessehilario)
 
 [My LinkedIn](https://www.linkedin.com/in/jesse-hilario-5b8391178/)
-
-Email me: jih32@scarletmail.rutgers.edu
 
 ***
 ## Certifications
