@@ -1,0 +1,167 @@
+DROP DATABASE IF EXISTS project_portfolio;
+CREATE DATABASE project_portfolio; 
+USE project_portfolio;
+
+CREATE TABLE covid_vaccinations (
+iso_code VARCHAR(10),
+continent VARCHAR(20),
+location VARCHAR(50),
+date DATE,
+total_tests INT,
+new_tests INT,
+total_tests_per_thousand FLOAT,
+new_tests_per_thousand FLOAT,
+new_tests_smoothed MEDIUMINT,
+new_tests_smoothed_per_thousand FLOAT,
+positive_rate FLOAT,
+tests_per_case DECIMAL(8,1),
+tests_units VARCHAR(25),
+total_vaccinations BIGINT,
+people_vaccinated BIGINT,
+people_fully_vaccinated BIGINT,
+total_boosters BIGINT,
+new_vaccinations INT,
+new_vaccinations_smoothed INT,
+total_vaccinations_per_hundred DECIMAL(5,2),
+people_vaccinated_per_hundred DECIMAL(5,2),
+people_fully_vaccinated_per_hundred DECIMAL(5,2),
+total_boosters_per_hundred DECIMAL(5,2),
+new_vaccinations_smoothed_per_million MEDIUMINT,
+new_people_vaccinated_smoothed INT,
+new_people_vaccinated_smoothed_per_hundred DECIMAL(5,3),
+stringency_index DECIMAL(5,2),
+population_density DECIMAL(8,3),
+median_age DECIMAL(3,1),
+aged_65_older DECIMAL(5,3),
+aged_70_older DECIMAL(5,3),
+gdp_per_capita DECIMAL(9,3),
+extreme_poverty DECIMAL(3,1),
+cardiovasc_death_rate DECIMAL(6,3),
+diabetes_prevalence DECIMAL(4,2),
+female_smokers DECIMAL(4,3),
+male_smokers DECIMAL(5,3),
+handwashing_facilities DECIMAL(6,3),
+hospital_beds_per_thousand DECIMAL(5,3),
+life_expectancy DECIMAL(4,2),
+human_development_index DECIMAL(4,3)
+);
+
+LOAD DATA LOCAL INFILE "C:/Users/jesse/OneDrive/Documents/myWork/projects/CovidVaccinations.csv"
+	INTO TABLE project_portfolio.covid_vaccinations
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES
+(iso_code, continent, location, 
+date, @vtotal_tests, @vnew_tests, total_tests_per_thousand, 
+new_tests_per_thousand, @vnew_tests_smoothed, new_tests_smoothed_per_thousand, 
+positive_rate, @vtests_per_case, tests_units, @vtotal_vaccinations, 
+@vpeople_vaccinated, @vpeople_fully_vaccinated, @vtotal_boosters, @vnew_vaccinations, 
+@vnew_vaccinations_smoothed, @vtotal_vaccinations_per_hundred, 
+@vpeople_vaccinated_per_hundred, @vpeople_fully_vaccinated_per_hundred,
+@vtotal_boosters_per_hundred, @vnew_vaccinations_smoothed_per_million,
+@vnew_people_vaccinated_smoothed, @vnew_people_vaccinated_smoothed_per_hundred,
+@vstringency_index, @vpopulation_density, @vmedian_age,
+@vaged_65_older, @vaged_70_older, @vgdp_per_capita, @vextreme_poverty,
+@vcardiovasc_death_rate, @vdiabetes_prevalence, @vfemale_smokers,
+@vmale_smokers, @vhandwashing_facilities, @vhospital_beds_per_thousand,
+@vlife_expectancy, @vhuman_development_index
+)
+SET 
+total_tests = NULLIF(@vtotal_tests,''),
+new_tests = NULLIF(@vnew_tests,''),
+new_tests_smoothed = NULLIF(@vnew_tests_smoothed,''),
+tests_per_case = NULLIF(@vtests_per_case,''),
+total_vaccinations = NULLIF(@vtotal_vaccinations,''),
+people_vaccinated = NULLIF(@vpeople_vaccinated,''),
+people_fully_vaccinated = NULLIF(@vpeople_fully_vaccinated,''),
+total_boosters = NULLIF(@vtotal_boosters,''),
+new_vaccinations = NULLIF(@vnew_vaccinations,''),
+new_vaccinations_smoothed = NULLIF(@vnew_vaccinations_smoothed,''),
+total_vaccinations_per_hundred = NULLIF(@vtotal_vaccinations_per_hundred,''),
+people_vaccinated_per_hundred = NULLIF(@vpeople_vaccinated_per_hundred,''),
+people_fully_vaccinated_per_hundred = NULLIF(@vpeople_fully_vaccinated_per_hundred,''),
+total_boosters_per_hundred = NULLIF(@vtotal_boosters_per_hundred,''),
+new_vaccinations_smoothed_per_million = NULLIF(@vnew_vaccinations_smoothed_per_million,''),
+new_people_vaccinated_smoothed = NULLIF(@vnew_people_vaccinated_smoothed,''),
+new_people_vaccinated_smoothed_per_hundred = NULLIF(@vnew_people_vaccinated_smoothed_per_hundred,''),
+stringency_index = NULLIF(@vstringency_index,''),
+population_density = NULLIF(@vpopulation_density,''),
+median_age = NULLIF(@vmedian_age,''),
+aged_65_older = NULLIF(@vaged_70_older,''),
+aged_70_older = NULLIF(@vaged_70_older,''),
+gdp_per_capita = NULLIF(@vgdp_per_capita,''),
+extreme_poverty = NULLIF(@vextreme_poverty,''),
+cardiovasc_death_rate = NULLIF(@vcardiovasc_death_rate,''),
+diabetes_prevalence = NULLIF(@vdiabetes_prevalence,''),
+female_smokers = NULLIF(@vfemale_smokers,''),
+male_smokers = NULLIF(@vmale_smokers,''),
+handwashing_facilities = NULLIF(@vhandwashing_facilities,''),
+hospital_beds_per_thousand = NULLIF(@vhospital_beds_per_thousand,''),
+life_expectancy = NULLIF(@vlife_expectancy,''),
+human_development_index = NULLIF(@vhuman_development_index,'');
+
+
+CREATE TABLE covid_deaths (
+iso_code VARCHAR(10),
+continent VARCHAR(20),
+location VARCHAR(50),
+date DATE,
+population BIGINT,
+total_cases BIGINT,
+new_cases INT,
+new_cases_smoothed FLOAT,
+total_deaths INT,
+new_deaths MEDIUMINT,
+new_deaths_smoothed FLOAT,
+total_cases_per_million FLOAT,
+new_cases_per_million FLOAT,
+new_cases_smoothed_per_million FLOAT,
+total_deaths_per_million FLOAT,
+new_deaths_per_million FLOAT,
+new_deaths_smoothed_per_million FLOAT,
+reproduction_rate FLOAT,
+icu_patients MEDIUMINT,
+icu_patients_per_million FLOAT,
+hosp_patients MEDIUMINT,
+hosp_patients_per_million FLOAT,
+weekly_icu_admissions SMALLINT,
+weekly_icu_admissions_per_million FLOAT,
+weekly_hosp_admissions MEDIUMINT,
+weekly_hosp_admissions_per_million FLOAT,
+excess_mortality_cumulative_absolute DECIMAL(8,1),
+excess_mortality_cumulative	DECIMAL(4,2),
+excess_mortality DECIMAL(5,2),
+excess_mortality_cumulative_per_million FLOAT
+);
+
+LOAD DATA LOCAL INFILE "C:/Users/jesse/OneDrive/Documents/myWork/projects/CovidDeaths.csv"
+	INTO TABLE project_portfolio.covid_deaths
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES
+(iso_code, continent, location, date,
+@vpopulation, @vtotal_cases, @vnew_cases, @vnew_cases_smoothed,
+@vtotal_deaths, @vnew_deaths,
+new_deaths_smoothed, total_cases_per_million, new_cases_per_million,
+new_cases_smoothed_per_million, total_deaths_per_million, new_deaths_per_million,
+new_deaths_smoothed_per_million, reproduction_rate,
+@vicu_patients, icu_patients_per_million, @vhosp_patients, hosp_patients_per_million,
+@vweekly_icu_admissions, weekly_icu_admissions_per_million, @vweekly_hosp_admissions,
+weekly_hosp_admissions_per_million, @vexcess_mortality_cumulative_absolute,
+@vexcess_mortality_cumulative, @vexcess_mortality, excess_mortality_cumulative_per_million
+)
+SET 
+-- date = STR_TO_DATE(@datevar,'%Y/%m/%d'),
+population = NULLIF(@vpopulation,''),
+total_cases = NULLIF(@vtotal_cases,''),
+new_cases = NULLIF(@vnew_cases,''),
+new_cases_smoothed = NULLIF(@vnew_cases_smoothed,''),
+total_deaths = NULLIF(@vtotal_deaths,''),
+new_deaths = NULLIF(@vnew_deaths,''),
+icu_patients = NULLIF(@vicu_patients,''),
+hosp_patients = NULLIF(@vhosp_patients,''),
+weekly_icu_admissions = NULLIF(@vweekly_icu_admissions,''),
+weekly_hosp_admissions = NULLIF(@vweekly_hosp_admissions,''),
+excess_mortality_cumulative_absolute = NULLIF(@vexcess_mortality_cumulative_absolute,''),
+excess_mortality_cumulative = NULLIF(@vexcess_mortality_cumulative,''),
+excess_mortality = NULLIF(@vexcess_mortality,'');
