@@ -9,6 +9,7 @@ I currently have projects for [R](https://github.com/JesseHilario/JesseHilario.g
 
 My first project was the capstone for the Google Data Analytics Certification. Using Rstudio, I processed and cleaned data to analyze and visualize trends in smart device usage in order to make high-level recommendations for Bellabeat marketing strategy.
 
+The following visualisations were made using the package ggplot2:
 ![Rplot 5](https://user-images.githubusercontent.com/106210905/183310908-0fee648f-4053-4a23-832d-845b4003d6c2.png)
 
 ![Rplot2 5](https://user-images.githubusercontent.com/106210905/183310910-adc5ecab-b76a-4968-8e51-f916824335be.png)
