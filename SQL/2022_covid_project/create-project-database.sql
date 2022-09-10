@@ -46,7 +46,7 @@ life_expectancy DECIMAL(4,2),
 human_development_index DECIMAL(4,3)
 );
 
-LOAD DATA LOCAL INFILE "C:/Users/jesse/OneDrive/Documents/myWork/projects/CovidVaccinations.csv"
+LOAD DATA LOCAL INFILE "C:/Users/jesse/OneDrive/Documents/myWork/projects/Portfolio/JesseHilario.github.io/SQL/2022_covid_project/CovidVaccinations.csv"
 	INTO TABLE project_portfolio.covid_vaccinations
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\n'
@@ -134,7 +134,7 @@ excess_mortality DECIMAL(5,2),
 excess_mortality_cumulative_per_million FLOAT
 );
 
-LOAD DATA LOCAL INFILE "C:/Users/jesse/OneDrive/Documents/myWork/projects/CovidDeaths.csv"
+LOAD DATA LOCAL INFILE "C:/Users/jesse/OneDrive/Documents/myWork/projects/Portfolio/JesseHilario.github.io/SQL/2022_covid_project/CovidDeaths.csv"
 	INTO TABLE project_portfolio.covid_deaths
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\n'

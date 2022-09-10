@@ -107,12 +107,6 @@ SELECT *, (rolling_vaccinations/population)*100 AS percent_vaccinated		--
 FROM project_portfolio.current_vac_percentage
 WHERE continent != '';
 
--- Create View
-DROP VIEW IF EXISTS project_portfolio.rolling_percent_vac;
-CREATE VIEW project_portfolio.rolling_percent_vac AS
-SELECT *, (rolling_vaccinations/population)*100 AS percent_vaccinated		-- 
-FROM project_portfolio.current_vac_percentage
-WHERE continent != '';
 
 
 -- Create CTE for each country's current percent of population vaccinated who are fully vaccinated
