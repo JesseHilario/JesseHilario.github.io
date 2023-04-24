@@ -1,6 +1,6 @@
 # Project Overview
 
-I currently have projects for [R](https://github.com/JesseHilario/JesseHilario.github.io/tree/main/R) and [SQL](https://github.com/JesseHilario/JesseHilario.github.io/tree/main/SQL), accessible in the above folders.
+I currently have projects for [Python](https://github.com/JesseHilario/JesseHilario.github.io/tree/main/Python), [R](https://github.com/JesseHilario/JesseHilario.github.io/tree/main/R), and [SQL](https://github.com/JesseHilario/JesseHilario.github.io/tree/main/SQL), accessible in the above folders.
 
 ## R
 
