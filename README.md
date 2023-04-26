@@ -2,6 +2,16 @@
 
 I currently have projects for [Python](https://github.com/JesseHilario/JesseHilario.github.io/tree/main/Python), [R](https://github.com/JesseHilario/JesseHilario.github.io/tree/main/R), and [SQL](https://github.com/JesseHilario/JesseHilario.github.io/tree/main/SQL), accessible in the above folders.
 
+## Python
+
+### Machine Learning algorithms from scratch
+
+I am working on implementing some of the most popular machine learning algorithms from scratch, testing on a small custom-made dataset, then applying to some real-world data. I'm hoping to test performance metrics against sklearn (or other) implementations. So far I'm close to finishing the following:
+- Apriori
+- Decision Tree (ID3)
+
+
+
 ## R
 
 ### Project 1
