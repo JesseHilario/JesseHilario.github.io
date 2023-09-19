@@ -6,9 +6,8 @@ I currently have projects for [Python](https://github.com/JesseHilario/JesseHila
 
 ### Machine Learning algorithms from scratch
 
-I am working on implementing some of the most popular machine learning algorithms from scratch, testing on a small custom-made dataset, then applying to some real-world data. I'm hoping to test performance metrics against sklearn (or other) implementations. So far I'm close to finishing the following:
-- Apriori
-- Decision Tree (ID3)
+**Apriori vs Brute Force Algorithms:**
+I generated [transactional sample data](https://github.com/JesseHilario/JesseHilario.github.io/blob/main/Python/Apriori%20vs%20Brute%20Force%20Algorithms/example_data/example_data.py) to create random itemsets, in order to build my algorithm. I compared the run times between [Brute Force](https://github.com/JesseHilario/JesseHilario.github.io/blob/main/Python/Apriori%20vs%20Brute%20Force%20Algorithms/Brute_Force/__init__.py) and [Apriori](https://github.com/JesseHilario/JesseHilario.github.io/blob/main/Python/Apriori%20vs%20Brute%20Force%20Algorithms/Apriori/__init__.py) using this dataset. Apriori's pruning of nonfrequent itemsets allowed it to outperform the Brute Force method by order of magnitudes, taking less than 1 second to mine association rules.
 
 
 
